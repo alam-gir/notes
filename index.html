@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes...</title>
+    <!-- css link  -->
+    <link rel="stylesheet" href="style/style.css">
+
+    <!-- font link  -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- icon link  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round|Material+Icons+Outlined"
+      rel="stylesheet">
+
+
+</head>
+<body>
+    <header>
+        <div class="profile">
+            <article class="info">
+                <h2 class="name">Users Name</h2>
+                <h3 class="description">Users Description</h3>
+            </article>
+            <div class="profile-photo">
+                <img src="asset/image/profile/round_person_black_24dp.png" alt="pp">
+            </div>
+        </div>
+    </header>
+
+    <!-- user input form  start-->
+
+    <div class="form-container" >
+        <form action="" id="user-input-form" >
+            <div id="submit-btn"><span class="material-icons">arrow_back</span></div>
+            <input type="text" name="notes-tittle" id="input-tittle" placeholder="Tittle">
+
+            <textarea name="input-text" id="notes-text" placeholder="Note..." ></textarea>
+
+            
+    
+        </form>
+    </div>
+
+    <!-- user input form end  -->
+    <section class="search-section">
+        <div class="search-box"><input type="search" name="search" placeholder="Search Notes ..." id="">
+            <i class="material-icons">search</i>
+        </div>
+    </section>
+
+    <!-- notes section start  -->
+
+    <main class="main-container">
+        <h1>Notes...</h1>
+        <!-- notes container  -->
+
+        <article class="notes-container">
+
+            <!-- single notes start -->
+
+            <div class="notes-card">
+                <div class="notes-btns">
+                    <span class="material-icons-round">edit_note</span>
+                    <span class="material-icons-outlined">delete</span>
+                </div>
+                <article class="notes-area">
+                    <h2 class="notes-tittle">This is notes tittle..</h2>
+                    <p class="notes-text">Lorem voluptatem ipsum dolor sit amet, consectetur Repudiandae rerum iusto adipisicing elit.  .<span>...</span></p>
+                </article>
+            </div>
+
+            <!-- single notes end -->
+
+        </article>
+    </main>
+    <footer> 
+        <li class="menu"><i class="material-icons-outlined">widgets</i></li>
+        <li class="add-notes round"><i class="material-icons-outlined">add_circle_outline</i></I></li>
+        <li class="footer-profile"><i class="material-icons-outlined">account_circle</i></li>
+    </footer>
+
+
+
+    <!-- script link  -->
+    <script src="js/app.js"></script>
+</body>
+</html>

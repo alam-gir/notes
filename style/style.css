@@ -1,0 +1,433 @@
+/*................. variables............. */
+
+
+:root{
+    --primaryBright: #E0ECDE;
+    --primaryDark: #CDE0C9;
+    --background: #ffffff;
+    --accent: #68B2A0;
+    --btnHover: #72ddc2;
+    --colorHighlight: #50e3c2;
+
+    /* font  */
+    --roboto: 'Roboto',sans-serif;
+    --montserrat: 'Montserrat',sans-serif;
+
+    /* letter-spacing */
+    --space: .1rem;
+
+    /* shadow  */
+    --basicShadaow: 1px 5px 5px rgb(0 0 0 / 5%);
+
+    /* transtiontime */
+    --transittionShort: all .2s ease-in-out;
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    background: var(--background);
+    box-shadow: var(--basicShadaow);
+    height: 5rem;
+    padding: 0 1rem;
+
+}
+
+.profile{
+    height: 100%;
+    width: 100%;
+    max-width: 34rem;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h2.name {
+    font-size: 1rem;
+    color: #333333;
+    font-weight: 700;
+    font-family: var(--montserrat);
+    letter-spacing: var(--space);
+    text-transform: uppercase;
+}
+
+h3.description {
+    font-size: .875rem;
+    color: #555555;
+    font-family: var(--montserrat);
+    font-weight: 400;
+    text-transform: capitalize;
+}
+.profile-photo{
+    height: 3rem;
+    width: 3rem;
+    background: var(--primaryBright);
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.profile-photo img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* header end  */
+
+/* search section start  */
+.search-section{
+    height: 5rem;
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-section .search-box{
+    height: 2rem;
+    width: 70%;
+    max-width: 34rem;
+    margin: auto;
+    position: relative;
+}
+.search-section input{
+    height: 2rem;
+    width: 100%;
+    border-radius: 1rem;
+    outline: none;
+    border: 1px solid var(--primaryDark);
+    padding: 0 1rem 0  2.2rem;
+    font-size: .875rem;
+    color: #666666;
+    text-transform: capitalize;
+
+}
+
+.search-section input:focus{
+    border:1px solid var(--accent);
+}
+.search-section i{
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666666;
+    font-size: 1rem;
+}
+
+/* search section end  */
+
+
+/* main section start  */
+
+.main-container{
+    height: auto;
+    width: 100%;
+    max-width: 60rem;
+    margin: auto;
+    padding: 0 1rem;
+    background-color: var(--background);
+}
+.main-container h1{
+    font-size: 1.3rem;
+    font-family: var(--montserrat);
+    letter-spacing: var(--space);
+    font-weight: 400;
+    clear: #555555;
+    display: block;
+    position: relative;
+}
+.main-container h1::after{
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 1px;
+    background-color: var(--accent);
+    left: 0;
+    bottom: -10%;
+}
+
+.main-container .notes-container{
+    height: auto;
+    width: 100%;
+    padding: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    
+}
+
+.notes-container .notes-card{
+    height: 15rem;
+    max-width: 11rem;
+    background: var(--primaryDark);
+    padding: 1rem;
+    border-radius: .5rem;
+    position: relative;
+    transition: var(--transittionShort);
+
+}
+
+/* card colors  */
+.notes-card:nth-child(2n+2){
+    top: 3rem;
+    background-color: #CDE0C9;
+}
+.notes-card:nth-child(4n+3){
+    background-color: #F0EBD1;
+}
+.notes-card:nth-child(3n+2){
+    background-color: #C9E0DE;
+}
+
+.notes-card:nth-child(2n+1):hover{
+    outline: 1px solid var(--primaryBright);
+    border-radius: 0;
+    background-color: #fff;
+}
+.notes-card:nth-child(2n+2):hover{
+    outline: 1px solid var(--primaryBright);
+    border-radius: 0;
+    background-color: #fff;
+}
+
+
+
+/* -----media screen for notes container start----- */
+@media screen and (max-width:400px) {
+    .notes-container{
+        gap: 1rem;
+    }
+
+    .notes-card:nth-child(2n+2){
+        top: 0;
+    }
+}
+
+@media screen and (min-width:590px) {
+    .notes-container{
+        gap: 1rem;
+    }
+    .main-container h1{
+        margin-left: 2rem;
+    }
+
+    .notes-card:nth-child(2n+2){
+        top: 0;
+        background-color: var(--primaryBright);
+    }
+}
+
+
+
+
+/* -----media screen for notes container start----- */
+
+
+
+
+.notes-card .notes-btns{
+    height: 2rem;
+    width: 3.5rem; 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
+    color: var(--accent);
+}
+.notes-btns span{
+    transition: var(--transittionShort);
+    cursor: pointer;
+}
+
+.notes-btns span:hover{
+    color: #72ddc2;
+}
+
+
+.notes-card .notes-area{
+    margin-top: 2rem;
+}
+
+.notes-area .notes-tittle{
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: var(--montserrat);
+    letter-spacing: calc(var(--space)*.7);
+    padding: 0 0 .5rem;
+    color: #333333;
+}
+.notes-area .notes-text{
+    font-size: .875rem;
+    font-family: var(--roboto);
+    letter-spacing: 1px;
+    color: #696969;
+    text-align: left;
+}
+
+
+/* footer start  */
+
+footer{
+    height: 4rem;
+    width: 100%;
+    max-width: 60rem;
+    padding: 0 2rem;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow:  0 0px 25px rgb(0, 0, 0, .1);
+
+}
+footer li{
+    list-style: none;
+    width: 3rem;
+    height: 100%;
+    line-height: 3rem;
+}
+footer li .material-icons-outlined{
+    height: 100%;
+    font-size: 2.5rem;
+    color: #555555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transittionShort);
+    cursor: pointer;
+}
+
+footer .material-icons-outlined:hover{
+    color: var(--accent);
+    scale: 1.2;
+}
+
+footer .round{
+    background-color: #fff;
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    z-index: -11;
+    box-shadow: 0 -15px 15px -11px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* user input form style  */
+
+.form-container{
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    top: -100%;
+    left: -100%;
+    background: transparent;
+    border-radius: 100rem;
+    overflow: hidden;
+    z-index: 11;
+    transition: var(--transittionShort);
+    
+}
+
+.form-container #user-input-form{
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    background: var(--primaryBright);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* submit btn style  */
+
+#submit-btn{
+    height: auto;
+    width: 100%;
+    padding: .2rem 1.5rem;
+    background: var(--primaryDark) ;
+    outline: none;
+    border: none;
+    text-align: left;
+}
+#submit-btn span{
+    color: var(--accent);
+    font-size: 2rem;
+    display: inline;
+    transition: var(--transittionShort);
+}
+#submit-btn span:hover{
+    color: var(--btnHover);
+}
+
+/* input box style  */
+
+#user-input-form input, #notes-text{
+    width: 100%;
+    max-width: 60rem;
+    margin: auto;
+    background: var(--primaryBright);
+    outline: none;
+    border: none;
+    padding: 1rem 2rem;
+    text-transform: capitalize;
+    
+}
+
+#input-tittle{
+    height: 3rem;
+    font-size: 1rem;
+    color: #555555;
+    font-weight: 700;
+    font-family: var(--montserrat);
+    letter-spacing: var(--space);
+    /* box-shadow: var(--basicShadaow); */
+}
+#notes-text{
+    height: 100%;
+    color: #555555;
+    font-family: var(--roboto);
+    letter-spacing: var(--space);
+    font-weight: 400;
+    resize: none;
+    scroll-behavior: smooth;
+    box-shadow: inset 0 0px 25px #00000010;
+}
+
+/* text area text selection  */
+#user-input-form input::selection, #notes-text::selection{
+    background-color: var(--colorHighlight);
+}
+
+/* scrolbar of textarea  */
+
+#notes-text::-webkit-scrollbar{
+    width: .5rem;
+    background-color: var(--accent);
+    
+}
+#notes-text::-webkit-scrollbar-button{
+    width: .5rem;
+    height: .5rem;
+    background: antiquewhite;
+}
+#notes-text::-webkit-scrollbar-thumb{
+    height: 2rem;
+    background-color: var(--primaryDark);
+}
+
