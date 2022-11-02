@@ -158,6 +158,7 @@ h3.description {
     width: 100%;
     padding: 1.5rem 0;
     display: flex;
+    position: relative;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
@@ -167,17 +168,19 @@ h3.description {
 .notes-container .notes-card{
     height: 15rem;
     max-width: 11rem;
+    min-width: 11rem;
     background: var(--primaryDark);
     padding: 1rem;
     border-radius: .5rem;
     position: relative;
     transition: var(--transittionShort);
+    overflow: hidden;
 
 }
 
 /* card colors  */
 .notes-card:nth-child(2n+2){
-    top: 3rem;
+    /* bottom: -3rem; */
     background-color: #CDE0C9;
 }
 .notes-card:nth-child(4n+3){
@@ -240,9 +243,13 @@ h3.description {
     justify-content: space-around;
     align-items: center;
     position: absolute;
+    top: -2rem;
+    /* when cursor on card .notes-btn should - top: .5rem; */
     right: .5rem;
-    top: .5rem;
     color: var(--accent);
+    /* display: none; */
+    display: initial;
+    transition: all .5s ease-in-out;
 }
 .notes-btns span{
     transition: var(--transittionShort);
@@ -254,11 +261,15 @@ h3.description {
 }
 
 
-.notes-card .notes-area{
-    margin-top: 2rem;
+.notes-area{
+    position: relative;
+    top: 0;
+    /* when cursor on card notes ared shord margin-top: 2rem; */
+    transition: var(--transittionShort);
+    margin: none;
 }
 
-.notes-area .notes-tittle{
+.notes-tittle{
     font-size: 1.1rem;
     font-weight: 600;
     font-family: var(--montserrat);
@@ -266,7 +277,7 @@ h3.description {
     padding: 0 0 .5rem;
     color: #333333;
 }
-.notes-area .notes-text{
+.notes-text{
     font-size: .875rem;
     font-family: var(--roboto);
     letter-spacing: 1px;
@@ -282,6 +293,7 @@ footer{
     width: 100%;
     max-width: 60rem;
     padding: 0 2rem;
+    background-color: transparent;
     position: fixed;
     bottom: 0;
     left: 50%;
@@ -318,7 +330,8 @@ footer .round{
     background-color: #fff;
     height: 6rem;
     width: 6rem;
-    border-radius: 50%;
+    background-color: #ffebcd;
+    border-radius: 30%;
     z-index: -11;
     box-shadow: 0 -15px 15px -11px rgba(0, 0, 0, 0.1);
 }
