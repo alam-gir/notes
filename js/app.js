@@ -169,7 +169,7 @@ function cardsSystem(){
         
     });
 
-
+ 
 
     // notes card mouseOver Out action ------------
     notesCard.forEach(card => {

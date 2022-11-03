@@ -272,7 +272,7 @@ h3.description {
     transition: var(--transittionShort);
     margin: none;
 }
-
+ 
 .notes-tittle{
     max-height: 1.5rem;
     overflow: hidden;
