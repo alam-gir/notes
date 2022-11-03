@@ -24,6 +24,9 @@
 
 }
 
+html{
+    scroll-behavior: smooth;
+}
 *{
     margin: 0;
     padding: 0;
@@ -131,7 +134,7 @@ h3.description {
     width: 100%;
     max-width: 60rem;
     margin: auto;
-    padding: 0 1rem;
+    padding: 1rem 0 5rem 0;
     background-color: var(--background);
 }
 .main-container h1{

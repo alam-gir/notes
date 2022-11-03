@@ -27,7 +27,6 @@ const allNotes = JSON.parse(localStorage.getItem("allNotes")) || [];
 
 window.addEventListener('DOMContentLoaded',()=>{
     showNotes();
-    console.log("abc");
 
     
 })
@@ -35,15 +34,21 @@ window.addEventListener('DOMContentLoaded',()=>{
 
 // add notes btn evetn 
 addBtn.addEventListener('click', (e)=>{
-    userInputFormShow(e);
+    userInputFormShow();
+    // submit/backward btn event
+    formSubmitBtn.addEventListener('click', ()=>{
+        userInputFormHide();
+        showNotes();
+        addNotes();
+        window.location.reload();
+        
+        
+    })
 })
 
 
 
-// submit/backward btn event
-formSubmitBtn.addEventListener('click', userInputFormHide);
-formSubmitBtn.addEventListener('click', addNotes);
-formSubmitBtn.addEventListener('click', showNotes);
+
 
 
 
@@ -58,7 +63,7 @@ formSubmitBtn.addEventListener('click', showNotes);
 
 
 // open user input form function
-function userInputFormShow(e){
+function userInputFormShow(){
     formContainer.style.top = 0;
     formContainer.style.left = 0;
     formContainer.style.borderRadius = 0;
@@ -140,7 +145,6 @@ function cardBtnsSystem(){
 
             notesCardBtns.style.top = ".5rem";
             notesAreaMove.style.top = "1rem";
-            console.log('alhamdulillah');
 
         })
         card.addEventListener('mouseout', e=>{
@@ -151,6 +155,35 @@ function cardBtnsSystem(){
             notesAreaMove.style.top = "0";
 
         })
+
+        card.addEventListener('click',(e)=>{
+            
+            const tittle = e.currentTarget.childNodes[3].childNodes[1].innerHTML;
+            const notesText = e.currentTarget.childNodes[3].childNodes[3].innerHTML;
+
+            notesView();
+            
+            inputedTittle.value = tittle;
+            inputedText.value = notesText;
+
+            formSubmitBtn.removeEventListener('click', addNotes);
+            formSubmitBtn.addEventListener('click', ()=>{
+                userInputFormHide();
+                showNotes();
+            })
+        })
     });
+
+}
+
+
+function notesView(){
+    
+    formContainer.style.top = 0;
+    formContainer.style.left = 0;
+    formContainer.style.borderRadius = 0;
+}
+
+function notesModify(){
 
 }
