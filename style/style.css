@@ -284,6 +284,7 @@ h3.description {
     margin-bottom: .5rem;
     color: #333333;
     word-wrap: break-word;
+    text-transform: capitalize;
 }
 .notes-text{
     max-height: 8rem;

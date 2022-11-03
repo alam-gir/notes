@@ -158,12 +158,34 @@ function cardsSystem(){
             e.stopPropagation();
             const  currentBtn = e.currentTarget.dataset.id;
             const currentNotes = e.currentTarget.parentElement.parentElement.dataset.id;
+            // delete btn clicking
             if(currentBtn == "delete"){
                 allNotes.splice(currentNotes,1)
                 const leftNotes = allNotes;
                 localStorage.setItem("allNotes",JSON.stringify(leftNotes));
                 window.location.reload(); //reload for showing update instantly
                 
+            }
+            if(currentBtn == "edit"){
+                userInputFormShow();
+                // show notes data in form input section 
+                const actualNotes = allNotes[currentNotes];
+                    inputedTittle.value = actualNotes.tittle;
+                    inputedText.value = actualNotes.notesText;
+                formSubmitBtn.addEventListener('click',()=>{
+                    userInputFormHide();
+
+                    // make a new notes by our notescreate constructor
+                    const updatedNotes = new notesCreate(inputedTittle.value,inputedText.value)
+
+                    // replace array in allNotes 
+                    allNotes.splice(currentNotes,1,updatedNotes)
+                    
+                    // now set array in localStorage
+                    localStorage.setItem("allNotes",JSON.stringify(allNotes));
+
+                    location.reload(); //for instant updating in interface
+                })
             }
         })
         
@@ -194,41 +216,47 @@ function cardsSystem(){
         })
 
         card.addEventListener('click',(e)=>{
-            const tittle = e.currentTarget.childNodes[3].childNodes[1].innerHTML;
-            const notesText = e.currentTarget.childNodes[3].childNodes[3].innerHTML;
-            const currentNotes = card.dataset.id;
-            notesView();
-            const editBtn = e.currentTarget.childNodes[1].childNodes[1];
-            
-            inputedTittle.value = tittle;
-            inputedText.value = notesText;
-            formSubmitBtn.addEventListener('click', ()=>{
-                userInputFormHide();
 
+            notesViewAndUpdate();
 
-                // stored old data for undo in future
-                // const oldTittle=allNotes[currentNotes].inputedTitt;
-                // const oldNotesText = allNotes[currentNotes].notesText;
+            function notesViewAndUpdate(){
+                // viewing current notes in form 
 
-                // make a new notes by our notescreate constructor
-                const updatedNotes = new notesCreate(inputedTittle.value,inputedText.value)
-                console.log(updatedNotes)
-
-                // replace array in allNotes 
-                allNotes.splice(currentNotes,1,updatedNotes)
+                const currentNotes = card.dataset.id;
+                notesView();
                 
-                // now set array in localStorage
-                localStorage.setItem("allNotes",JSON.stringify(allNotes));
+                const actualNotes = allNotes[currentNotes];
 
-                location.reload(); //for instant updating in interface
-            })
-            
-                
+                inputedTittle.value = actualNotes.tittle;
+                inputedText.value = actualNotes.notesText;
 
+
+                // updating current notes after clikcing submit 
+                formSubmitBtn.addEventListener('click', ()=>{
+                    userInputFormHide();
+                    
+                    /*
+                    // stored old data for undo in future
+                    const oldTittle=allNotes[currentNotes].inputedTitt;
+                    const oldNotesText = allNotes[currentNotes].notesText;
+                    */
+
+                    // make a new notes by our notescreate constructor
+                    const updatedNotes = new notesCreate(inputedTittle.value,inputedText.value)
+
+                    // replace array in allNotes 
+                    allNotes.splice(currentNotes,1,updatedNotes)
+                    
+                    // now set array in localStorage
+                    localStorage.setItem("allNotes",JSON.stringify(allNotes));
+
+                    location.reload(); //for instant updating in interface
+                })
+            }
         })
-
-        
+ 
     });
+    
 
 }
 
@@ -239,16 +267,3 @@ function notesView(){
     formContainer.style.left = 0;
     formContainer.style.borderRadius = 0;
 }
-
-// function notesModify(){
-//     // get previous data from localStorage if no data take an empty arry
-//     const previousNotes = allNotes || [];
-
-//     // make notes by entry object 
-
-//     let notes = new notesCreate(inputedTittle.value, inputedText.value);
-//     previousNotes.push(notes);
-
-//     // set data in localStorage 
-//     localStorage.setItem("allNotes", JSON.stringify(previousNotes));
-// }
