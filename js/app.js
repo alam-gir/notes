@@ -182,6 +182,7 @@ function cardsSystem(){
 
             notesCardBtns.style.top = ".5rem";
             notesAreaMove.style.top = "1rem";
+            
 
         })
         card.addEventListener('mouseout', e=>{

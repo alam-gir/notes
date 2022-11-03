@@ -160,8 +160,8 @@ h3.description {
     height: auto;
     width: 100%;
     padding: 1.5rem 0;
-    display: flex;
     position: relative;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
@@ -217,7 +217,7 @@ h3.description {
     }
 }
 
-@media screen and (min-width:590px) {
+@media screen and (max-width:590px) {
     .notes-container{
         gap: 1rem;
     }
@@ -265,6 +265,7 @@ h3.description {
 
 
 .notes-area{
+    height: 100%;
     position: relative;
     top: 0;
     /* when cursor on card notes ared shord margin-top: 2rem; */
@@ -273,15 +274,20 @@ h3.description {
 }
 
 .notes-tittle{
+    max-height: 1.5rem;
+    overflow: hidden;
     font-size: 1.1rem;
     font-weight: 600;
     font-family: var(--montserrat);
     letter-spacing: calc(var(--space)*.7);
     padding: 0 0 .5rem;
+    margin-bottom: .5rem;
     color: #333333;
     word-wrap: break-word;
 }
 .notes-text{
+    max-height: 8rem;
+    overflow: hidden;
     font-size: .875rem;
     font-family: var(--roboto);
     letter-spacing: 1px;
