@@ -174,7 +174,7 @@ function cardsSystem(){
     // notes card mouseOver Out action ------------
     notesCard.forEach(card => {
 
-
+        
         // each card mouseover and mouseout event
         card.addEventListener('mouseover', e=>{
             const notesCardBtns = e.currentTarget.childNodes[1];
@@ -182,7 +182,6 @@ function cardsSystem(){
 
             notesCardBtns.style.top = ".5rem";
             notesAreaMove.style.top = "1rem";
-            
 
         })
         card.addEventListener('mouseout', e=>{
@@ -197,16 +196,34 @@ function cardsSystem(){
         card.addEventListener('click',(e)=>{
             const tittle = e.currentTarget.childNodes[3].childNodes[1].innerHTML;
             const notesText = e.currentTarget.childNodes[3].childNodes[3].innerHTML;
-
+            const currentNotes = card.dataset.id;
             notesView();
+            const editBtn = e.currentTarget.childNodes[1].childNodes[1];
             
             inputedTittle.value = tittle;
             inputedText.value = notesText;
-
             formSubmitBtn.addEventListener('click', ()=>{
                 userInputFormHide();
-                showNotes();
+
+
+                // stored old data for undo in future
+                // const oldTittle=allNotes[currentNotes].inputedTitt;
+                // const oldNotesText = allNotes[currentNotes].notesText;
+
+                // make a new notes by our notescreate constructor
+                const updatedNotes = new notesCreate(inputedTittle.value,inputedText.value)
+                console.log(updatedNotes)
+
+                // replace array in allNotes 
+                allNotes.splice(currentNotes,1,updatedNotes)
+                
+                // now set array in localStorage
+                localStorage.setItem("allNotes",JSON.stringify(allNotes));
+
+                location.reload(); //for instant updating in interface
             })
+            
+                
 
         })
 
@@ -223,6 +240,15 @@ function notesView(){
     formContainer.style.borderRadius = 0;
 }
 
-function notesModify(){
+// function notesModify(){
+//     // get previous data from localStorage if no data take an empty arry
+//     const previousNotes = allNotes || [];
 
-}
+//     // make notes by entry object 
+
+//     let notes = new notesCreate(inputedTittle.value, inputedText.value);
+//     previousNotes.push(notes);
+
+//     // set data in localStorage 
+//     localStorage.setItem("allNotes", JSON.stringify(previousNotes));
+// }
