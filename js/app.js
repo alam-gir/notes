@@ -3,6 +3,7 @@
 const addBtn = document.querySelector('.add-notes');
 const formContainer = document.querySelector('.form-container');
 const formSubmitBtn = document.getElementById('submit-btn');
+const mainContainerHeader =document.querySelector('.main-container h1');
 
 // for notes card btns animation 
 
@@ -31,19 +32,15 @@ window.addEventListener('DOMContentLoaded',()=>{
     
 })
 
-
+// add notes by click header 
+mainContainerHeader.addEventListener('click', ()=>{
+    userInputFormShow();
+    submitNotes();
+})
 // add notes btn evetn 
 addBtn.addEventListener('click', (e)=>{
     userInputFormShow();
-    // submit/backward btn event
-    formSubmitBtn.addEventListener('click', ()=>{
-        userInputFormHide();
-        showNotes();
-        addNotes();
-        window.location.reload();
-        
-        
-    })
+    submitNotes();
 })
 
 
@@ -60,6 +57,22 @@ addBtn.addEventListener('click', (e)=>{
 
 
 // function =======================================
+
+// submit/backward btn event
+function submitNotes(){
+    
+    formSubmitBtn.addEventListener('click', ()=>{
+        userInputFormHide();
+        showNotes();
+        addNotes();
+        window.location.reload();
+        
+        
+    })
+}
+
+
+
 
 
 // open user input form function

@@ -169,7 +169,7 @@ h3.description {
 }
 
 .notes-container .notes-card{
-    height: 15rem;
+    height: auto;
     max-width: 11rem;
     min-width: 11rem;
     background: var(--primaryDark);
@@ -279,6 +279,7 @@ h3.description {
     letter-spacing: calc(var(--space)*.7);
     padding: 0 0 .5rem;
     color: #333333;
+    word-wrap: break-word;
 }
 .notes-text{
     font-size: .875rem;
@@ -286,6 +287,7 @@ h3.description {
     letter-spacing: 1px;
     color: #696969;
     text-align: left;
+    word-wrap: break-word;
 }
 
 
