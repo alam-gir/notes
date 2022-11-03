@@ -109,11 +109,12 @@ function addNotes(){
 
 // show notes card on home
 function showNotes(){
+                let counter = 0;
                 const notesElement = allNotes.map(item=>{
-                    return `<div class="notes-card">
+                    return `<div class="notes-card" data-id="${counter++}">
                     <div class="notes-btns">
-                        <span class="material-icons-round">edit_note</span>
-                        <span class="material-icons-outlined">delete</span>
+                        <span class="material-icons-round" data-id="edit">edit_note</span>
+                        <span class="material-icons-outlined" data-id="delete">delete</span>
                     </div>
                     <article class="notes-area">
                         <h2 class="notes-tittle">${item.tittle}</h2>
@@ -124,17 +125,40 @@ function showNotes(){
             
                 notesContainer.innerHTML = notesElement;
 
-                // car btns system apear here because of the card will apear in dom after this showNotes function run 
-                cardBtnsSystem();
+                // card btns system apear here because of the card will apear in dom after this showNotes function run 
+                cardsSystem();
 }
 
 
 // card btn functions 
-function cardBtnsSystem(){
+function cardsSystem(){
     // card btns dunctions
     const notesCard = document.querySelectorAll('.notes-card');
 
-    // notes card mouseOver Out action 
+    // notes card edit and delete btn 
+    const notesCardBtns = document.querySelectorAll('.notes-btns span');
+
+    // card btns edit and delete function 
+
+    notesCardBtns.forEach(btn => {
+        btn.addEventListener('click',(e)=>{
+            e.stopPropagation();
+            const  currentBtn = e.currentTarget.dataset.id;
+            const currentNotes = e.currentTarget.parentElement.parentElement.dataset.id;
+            if(currentBtn == "delete"){
+                allNotes.splice(currentNotes,1)
+                const leftNotes = allNotes;
+                localStorage.setItem("allNotes",JSON.stringify(leftNotes));
+                window.location.reload(); //reload for showing update instantly
+                
+            }
+        })
+        
+    });
+
+
+
+    // notes card mouseOver Out action ------------
     notesCard.forEach(card => {
 
 
@@ -157,7 +181,6 @@ function cardBtnsSystem(){
         })
 
         card.addEventListener('click',(e)=>{
-            
             const tittle = e.currentTarget.childNodes[3].childNodes[1].innerHTML;
             const notesText = e.currentTarget.childNodes[3].childNodes[3].innerHTML;
 
@@ -166,12 +189,14 @@ function cardBtnsSystem(){
             inputedTittle.value = tittle;
             inputedText.value = notesText;
 
-            formSubmitBtn.removeEventListener('click', addNotes);
             formSubmitBtn.addEventListener('click', ()=>{
                 userInputFormHide();
                 showNotes();
             })
+
         })
+
+        
     });
 
 }
