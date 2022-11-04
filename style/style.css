@@ -456,3 +456,19 @@ footer .round{
     background-color: var(--primaryDark);
 }
 
+
+
+
+
+/* no notes found message  */
+
+.no-note-found-message{
+    color: tomato;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    text-align: center;
+    visibility: hidden;
+}
+.no-note-found-message::after{
+    display: none;
+}

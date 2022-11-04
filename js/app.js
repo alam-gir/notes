@@ -296,7 +296,18 @@ function filteredNotes(searchedText,allData){
             filteredNotes.push(allData[i]);
         }
     }
-    
+
+    // show a message that 'threre is no notes with this text' 
+
+    const noNotesMessage = document.querySelector('.no-note-found-message');
+
+    if(filteredNotes.length == 0){
+        noNotesMessage.style.visibility = "visible";
+    }
+    else noNotesMessage.style.visibility = "hidden";
+
+
     return showNotes(filteredNotes);
+    
 
 }
