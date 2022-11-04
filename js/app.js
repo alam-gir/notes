@@ -24,10 +24,14 @@ const notesContainer = document.querySelector('.notes-container');
 const allNotes = JSON.parse(localStorage.getItem("allNotes")) || [];
 
 
+//search user input 
+const searchUserInput = document.querySelector('#search-input');
+
+
 // event =======================================
 
 window.addEventListener('DOMContentLoaded',()=>{
-    showNotes();
+    showNotes(allNotes);
 
     
 })
@@ -63,7 +67,7 @@ function submitNotes(){
     
     formSubmitBtn.addEventListener('click', ()=>{
         userInputFormHide();
-        showNotes();
+        showNotes(allNotes);
         addNotes();
         window.location.reload();
         
@@ -121,9 +125,9 @@ function addNotes(){
 
 
 // show notes card on home
-function showNotes(){
+function showNotes(notes){
                 let counter = 0;
-                const notesElement = allNotes.map(item=>{
+                const notesElement = notes.map(item=>{
                     return `<div class="notes-card" data-id="${counter++}">
                     <div class="notes-btns">
                         <span class="material-icons-round" data-id="edit">edit_note</span>
@@ -266,4 +270,33 @@ function notesView(){
     formContainer.style.top = 0;
     formContainer.style.left = 0;
     formContainer.style.borderRadius = 0;
+}
+
+
+
+
+// search engine functionality 
+
+searchUserInput.addEventListener('keyup',()=>{
+    const searchedText = searchUserInput.value.toUpperCase();
+
+    filteredNotes(searchedText,allNotes);
+})
+
+// filtered Notes 
+function filteredNotes(searchedText,allData){
+    const filteredNotes = [];
+    const searched = searchedText;
+    // lets run a loop in allNotes array 
+    for(let i = 0; i<allData.length; i++){
+        const notesTittle = allData[i].tittle.toUpperCase();
+        const notesText = allData[i].notesText.toUpperCase();
+
+        if(notesTittle.includes(searched) || notesText.includes(searched)){
+            filteredNotes.push(allData[i]);
+        }
+    }
+    
+    return showNotes(filteredNotes);
+
 }
