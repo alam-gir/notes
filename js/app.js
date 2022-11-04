@@ -3,13 +3,8 @@
 const addBtn = document.querySelector('.add-notes');
 const formContainer = document.querySelector('.form-container');
 const formSubmitBtn = document.getElementById('submit-btn');
+const mainContainer =document.querySelector('.main-container')
 const mainContainerHeader =document.querySelector('.main-container h1');
-
-// for notes card btns animation 
-
-const notesArea = document.querySelector('.notes-area');
-
-
 
 // user inputed value 
 const userInputForm = document.querySelector('#user-input-form');
@@ -18,7 +13,6 @@ const inputedText= userInputForm[name="input-text"];
 
 // notes container for append all notes 
 const notesContainer = document.querySelector('.notes-container');
-
 
 // all notes from localStorage 
 const allNotes = JSON.parse(localStorage.getItem("allNotes")) || [];
@@ -199,73 +193,102 @@ function cardsSystem(){
 
     // notes card mouseOver Out action ------------
     notesCard.forEach(card => {
+        const cardBtns = card.childNodes[1];
+        const notesArea = card.childNodes[3];
 
         
         // each card mouseover and mouseout event
         card.addEventListener('mouseover', e=>{
-            const notesCardBtns = e.currentTarget.childNodes[1];
-            const notesAreaMove = e.currentTarget.childNodes[3];
+            cardMouseover(cardBtns,notesArea);
 
-            notesCardBtns.style.top = ".5rem";
-            notesAreaMove.style.top = "1rem";
-
+            if(listViewBtn.classList.contains('active')){
+                console.log('alhamdulillah')
+                cardMouseoverRepair(cardBtns,notesArea);
+            }
+            
         })
         card.addEventListener('mouseout', e=>{
-            const notesCardBtns = e.currentTarget.childNodes[1];
-            const notesAreaMove = e.currentTarget.childNodes[3];
-
-            notesCardBtns.style.top = "-2rem";
-            notesAreaMove.style.top = "0";
-
-        })
-
-        card.addEventListener('click',(e)=>{
-
-            notesViewAndUpdate();
-
-            function notesViewAndUpdate(){
-                // viewing current notes in form 
-
-                const currentNotes = card.dataset.id;
-                notesView();
-                
-                const actualNotes = allNotes[currentNotes];
-
-                inputedTittle.value = actualNotes.tittle;
-                inputedText.value = actualNotes.notesText;
-
-
-                // updating current notes after clikcing submit 
-                formSubmitBtn.addEventListener('click', ()=>{
-                    userInputFormHide();
-                    
-                    /*
-                    // stored old data for undo in future
-                    const oldTittle=allNotes[currentNotes].inputedTitt;
-                    const oldNotesText = allNotes[currentNotes].notesText;
-                    */
-
-                    // make a new notes by our notescreate constructor
-                    const updatedNotes = new notesCreate(inputedTittle.value,inputedText.value)
-
-                    // replace array in allNotes 
-                    allNotes.splice(currentNotes,1,updatedNotes)
-                    
-                    // now set array in localStorage
-                    localStorage.setItem("allNotes",JSON.stringify(allNotes));
-
-                    location.reload(); //for instant updating in interface
-                })
+            cardMouseout(cardBtns,notesArea);
+            if(listViewBtn.classList.contains('active')){
+                console.log('alhamdulillah')
+                cardMouseoverRepair(cardBtns,notesArea);
             }
+        })
+        
+
+        card.addEventListener('click',()=>{
+
+            notesViewAndUpdate(card);
+
+            
         })
  
     });
+
+
+
+
+    // mouseover and mouse out effect function 
+    function cardMouseover(cardBtns,notesArea){
+
+        cardBtns.style.top = ".5rem";
+            notesArea.style.top = "1rem";
+    }
+    
+    function cardMouseout(cardBtns,notesArea){
+
+            cardBtns.style.top = "-2rem";
+            notesArea.style.top = "0";
+    }
+
+    //if card view type in list view than mouseover and mouse out effect function repair
+    function cardMouseoverRepair(cardBtns,notesArea){
+        cardBtns.style.top = "0";
+        notesArea.style.top = "0";
+    }
+
+
+    // notesViewAndUpdate function 
+    function notesViewAndUpdate(card){
+        // viewing current notes in form 
+
+        const currentNotes = card.dataset.id;
+        formView();
+        
+        const actualNotes = allNotes[currentNotes];
+
+        inputedTittle.value = actualNotes.tittle;
+        inputedText.value = actualNotes.notesText;
+
+
+        // updating current notes after clikcing submit 
+        formSubmitBtn.addEventListener('click', ()=>{
+            userInputFormHide();
+            
+            /*
+            // stored old data for undo in future
+            const oldTittle=allNotes[currentNotes].inputedTitt;
+            const oldNotesText = allNotes[currentNotes].notesText;
+            */
+
+            // make a new notes by our notescreate constructor
+            const updatedNotes = new notesCreate(inputedTittle.value,inputedText.value)
+
+            // replace array in allNotes 
+            allNotes.splice(currentNotes,1,updatedNotes)
+            
+            // now set array in localStorage
+            localStorage.setItem("allNotes",JSON.stringify(allNotes));
+
+            location.reload(); //for instant updating in interface
+        })
+    }
     
 
 }
 
 
-function notesView(){
+function formView(){
     
     formContainer.style.top = 0;
     formContainer.style.left = 0;
@@ -295,19 +318,93 @@ function filteredNotes(searchedText,allData){
         if(notesTittle.includes(searched) || notesText.includes(searched)){
             filteredNotes.push(allData[i]);
         }
-    }
+    } 
 
-    // show a message that 'threre is no notes with this text' 
+// show a message that 'threre is no notes with this text' 
 
     const noNotesMessage = document.querySelector('.no-note-found-message');
 
-    if(filteredNotes.length == 0){
-        noNotesMessage.style.visibility = "visible";
-    }
-    else noNotesMessage.style.visibility = "hidden";
+    if(filteredNotes.length == 0) noNotesMessage.style.visibility = "visible";
+
+    if(filteredNotes.length > 0) noNotesMessage.style.visibility = "hidden";  
+
+    if(allNotes.length == 0) noNotesMessage.style.visibility = "hidden";
+    
 
 
     return showNotes(filteredNotes);
     
 
 }
+
+
+// if there is no notes than show a message 'add notes'
+
+    emptyNotesMessage()
+
+    function emptyNotesMessage(){
+        const emptyNotesMessage = document.querySelector('.emty-notes-message')
+
+        if(allNotes.length > 0)  emptyNotesMessage.style.visibility = "hidden";
+
+        else emptyNotesMessage.style.visibility = "visible";
+    }
+
+
+
+
+    // if click list view btn 
+    const viewBtns = document.querySelectorAll('.view-btns .view-btn');
+    const gridViewBtn = document.querySelector('.grid');
+    const listViewBtn = document.querySelector('.list');
+
+// run the function of list and grid view
+    ViewType()
+
+    function ViewType(){
+        
+        const previousClass = JSON.parse(localStorage.getItem('classList')) || [];
+
+        if(previousClass == "list-view"){
+            mainContainer.classList.add(previousClass);
+
+            // active class set 
+            gridViewBtn.classList.remove('active');
+            listViewBtn.classList.add('active')
+        }
+
+        listViewBtn.addEventListener('click',()=>{
+
+                localStorage.setItem('classList',JSON.stringify('list-view'))
+                const currentClass = JSON.parse(localStorage.getItem('classList'))
+                mainContainer.classList.add(currentClass);
+
+                // active class 
+                gridViewBtn.classList.remove('active');
+                listViewBtn.classList.add('active')
+
+
+                // need reload for stay needed posintion cards action btn,, my previous coding fault
+                window.location.reload();
+                
+            })
+
+        gridViewBtn.addEventListener('click',(e)=>{
+                e.stopPropagation();
+                console.log('click')
+                mainContainer.classList.remove('list-view');
+
+                localStorage.setItem('classList',JSON.stringify(''))
+
+                // active class set 
+                listViewBtn.classList.remove('active');
+                gridViewBtn.classList.add('active');
+                
+
+                // need reload for stay needed posintion cards action btn,, my previous coding fault
+                window.location.reload();
+            })
+
+            
+    }
+    

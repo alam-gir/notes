@@ -137,7 +137,48 @@ h3.description {
     padding: 1rem 0 5rem 0;
     background-color: var(--background);
 }
-.main-container h1{
+
+
+
+/* adds and view btns container  */
+
+.add-view-btns-container{
+    width: 80%;
+    height: auto;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.view-btns{
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+
+}
+
+.view-btns>span{
+    color: #555555;
+    font-size: 1.5rem;
+    position: relative;
+    transition: var(--transittionShort);
+}
+.view-btns>span:hover{
+    color: var(--accent);
+}
+/* when view btns click btn should add 'active' class */
+.view-btns>.active{
+    color: var(--accent);
+}
+
+
+
+/* header notes add btn  */
+
+.header-notes-add-btn{
     font-size: 1.3rem;
     font-family: var(--montserrat);
     letter-spacing: var(--space);
@@ -146,7 +187,7 @@ h3.description {
     display: block;
     position: relative;
 }
-.main-container h1::after{
+.header-notes-add-btn::after{
     content: "";
     position: absolute;
     width: 50%;
@@ -155,6 +196,11 @@ h3.description {
     left: 0;
     bottom: -10%;
 }
+
+
+
+
+/* notes container  */
 
 .main-container .notes-container{
     height: auto;
@@ -276,20 +322,20 @@ h3.description {
 .notes-tittle{
     max-height: 1.5rem;
     overflow: hidden;
-    font-size: 1.1rem;
+    font-size: .875rem;
     font-weight: 600;
     font-family: var(--montserrat);
     letter-spacing: calc(var(--space)*.7);
     padding: 0 0 .5rem;
     margin-bottom: .5rem;
     color: #333333;
-    word-wrap: break-word;
+    text-overflow: ellipsis;
     text-transform: capitalize;
 }
 .notes-text{
     max-height: 8rem;
     overflow: hidden;
-    font-size: .875rem;
+    font-size: .675rem;
     font-family: var(--roboto);
     letter-spacing: 1px;
     color: #696969;
@@ -457,7 +503,14 @@ footer .round{
 }
 
 
-
+/* emty notes message  */
+.emty-notes-message{
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: 'Roboto';
+    font-weight: 300;
+    color: #333333;
+}
 
 
 /* no notes found message  */
@@ -469,6 +522,34 @@ footer .round{
     text-align: center;
     visibility: hidden;
 }
-.no-note-found-message::after{
+
+
+
+
+/*if click in list view btn main-container will add list-view class  */
+.list-view>.notes-container>.notes-card{
+    display: flex;
+    align-items: center;
+    max-width: 20rem ;
+    min-width: 20rem ;
+}
+.list-view>.notes-container>.notes-card>.notes-btns{
+    position: inherit;
+    right: 0;
+    top: 0;
+    display: flex;
+}
+.list-view>.notes-container>.notes-card>.notes-area>{
+    padding: 0;
+    display: inline;
+    width: 100px !important;
+}
+.list-view>.notes-container>.notes-card>.notes-area>.notes-tittle{
+    margin: 0;
+    padding: 0 0 0 .5rem;
+    max-width: 100px;
+    line-height: 2rem;
+}
+.list-view>.notes-container>.notes-card>.notes-area>.notes-text{
     display: none;
 }
